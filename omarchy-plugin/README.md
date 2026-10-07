@@ -60,7 +60,7 @@ day stays free of practice for reviews that come due later.
    ```
 2. Install the plugin:
    ```bash
-   cd ~/Scripts/gtd-tui/omarchy-plugin
+   cd ~/code/gtd-tui/omarchy-plugin
    ./install.sh
    ```
 
@@ -93,7 +93,7 @@ the new `Panel.qml`.
 | `Super+Alt+P` · `Super+Shift+Alt+P` · `Super+Ctrl+Alt+P` | Start-pause · skip · popup |
 | In the popup | `p`/Space start-pause · `n` skip · `x` reset; OmaCal's keys still work (`o` `s` `r` `j` `q`) |
 
-Clicking a study session opens OmaCal on that day. The timer shows only 🍅
+Clicking a study session opens OmaCal on that day. The timer shows only a line timer icon
 while idle and counts down (dimmed when paused) otherwise. Its cycle matches
 the old TUI: focus, then a short break, with a long break after 4 rounds.
 When a phase ends you get a notification, and the timer survives shell restarts.
@@ -113,7 +113,6 @@ study-pomodoro plan [--dry-run]  plan the next 7 days now
 study-pomodoro progress          per-course overview
 study-pomodoro calendars         OmaCal calendars and their ids
 study-pomodoro toggle|reset|skip|status|popup
-study-pomodoro legacy-plan       the old weekly study_scheduler.py
 ```
 
 Settings: `~/.config/study-pomodoro/planner.json`. The planner's memory:

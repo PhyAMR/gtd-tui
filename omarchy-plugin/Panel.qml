@@ -12,6 +12,7 @@ import "../omacal.upcoming/Model.js" as Model
 import "../omacal.upcoming/Timeline.mjs" as Timeline
 import "../omacal.upcoming/MeetingPresence.mjs" as MeetingPresence
 import "../omacal.upcoming" as Omacal
+import "../phuniverse.islands" as Islands
 import "StudyModel.js" as Study
 
 // Study Pomodoro, mounted on OmaCal: a fork of OmaCal's omacal.upcoming bar
@@ -56,8 +57,10 @@ Panel {
 
   // ---- Study Pomodoro: timer (shared service) and today's study sessions.
   readonly property var pomo: bar && bar.shell ? bar.shell.serviceFor("phuniverse.study-pomodoro") : null
-  readonly property string pomoIcon: String(root.setting("icon", "🍅"))
-  readonly property string pomoBarText: !pomo || pomo.idle || barVertical ? pomoIcon : pomoIcon + " " + pomo.clockText
+  // Line timer icon (phuniverse.islands) instead of an emoji; the clock rides
+  // along while a session is running or paused.
+  readonly property bool pomoShowClock: !!pomo && !pomo.idle && !barVertical
+  readonly property string pomoBarText: pomoShowClock ? pomo.clockText : ""
   readonly property var studySessions: Study.todaySessions(feed, nowMs)
   readonly property var studyStates: Study.sessionStates(studySessions, nowMs)
   // The planner's session index: which sessions take a rating, and their grade.
@@ -564,17 +567,28 @@ Panel {
     visible: !!root.pomo
     // Sized to the measured text, like barTitle: a plain BarIconButton is
     // one icon slot wide and the countdown would spill over its neighbours.
-    slotSize: pomoMetrics.advanceWidth + Style.space(8)
+    slotSize: Style.bar.iconCanvas + (root.pomoShowClock ? pomoMetrics.advanceWidth + Style.space(4) : 0) + Style.space(8)
     dimmed: !!root.pomo && !root.pomo.running && !root.pomo.idle
     iconComponent: Component {
       Item {
-        Text {
+        Row {
           anchors.centerIn: parent
-          textFormat: Text.PlainText
-          text: root.pomoBarText
-          font.family: root.fontFamily
-          font.pixelSize: Style.font.body
-          color: pomoButton.foreground
+          spacing: Style.space(4)
+          Islands.LineIcon {
+            anchors.verticalCenter: parent.verticalCenter
+            name: "timer"
+            size: Style.bar.iconCanvas
+            color: pomoButton.foreground
+          }
+          Text {
+            anchors.verticalCenter: parent.verticalCenter
+            visible: root.pomoShowClock
+            textFormat: Text.PlainText
+            text: root.pomoBarText
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.body
+            color: pomoButton.foreground
+          }
         }
       }
     }
@@ -1171,10 +1185,10 @@ Panel {
       width: parent.width
       spacing: Style.space(10)
 
-      Text {
-        textFormat: Text.PlainText
-        text: root.pomoIcon
-        font.pixelSize: Style.font.heading
+      Islands.LineIcon {
+        name: "timer"
+        size: Style.font.heading + Style.space(4)
+        stroke: 1.4
         color: root.foreground
         Layout.alignment: Qt.AlignVCenter
       }
