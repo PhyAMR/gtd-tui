@@ -1,0 +1,10 @@
+[Unit]
+Description=Plan the next days of study sessions through OmaCal
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/study-pomodoro plan
+Restart=on-failure
+RestartSec=10min

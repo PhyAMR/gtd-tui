@@ -1,0 +1,27 @@
+{
+  "db_path": "$HOME/.config/gtd/gtd.db",
+  "token_path": "$HOME/.config/gtd/tokens.json",
+  "credentials_path": "$HOME/.credentials/credentials.json",
+  "plan_script_path": "$HOME/Scripts/study_scheduler.go",
+  "class_calendar_id": "primary",
+  "study_calendar_id": "primary",
+  "review_ratio": 0.75,
+  "time_windows": "9-13,16-20.5",
+  "sync_interval_secs": 300,
+  "pomodoro_work_mins": 25,
+  "pomodoro_break_mins": 5,
+  "pomodoro_long_break": 15,
+  "theme": "default",
+  "key_bindings": {
+    "quit": "q",
+    "tab": "tab",
+    "todo_up": "k",
+    "todo_down": "j",
+    "todo_toggle": "enter",
+    "todo_add": "a",
+    "todo_delete": "d",
+    "pomo_start": "s",
+    "pomo_reset": "r",
+    "pomo_skip": "n"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "id": "phuniverse.study-pomodoro",
+  "name": "Study Pomodoro",
+  "version": "2.0.0",
+  "author": "Alvaro Mendez",
+  "license": "MIT",
+  "description": "OmaCal's calendar widget with a pomodoro timer and today's study sessions. Requires OmaCal (https://omacal.app).",
+  "kinds": [
+    "service",
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "service": "Service.qml",
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Study Pomodoro",
+    "description": "OmaCal events plus a pomodoro timer and today's study sessions (needs OmaCal)",
+    "category": "Productivity",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "focusMins": 25,
+      "shortBreakMins": 5,
+      "longBreakMins": 15,
+      "cycles": 4,
+      "notify": true,
+      "icon": "🍅",
+      "maxEvents": 12
+    },
+    "schema": [
+      {
+        "key": "focusMins",
+        "type": "integer",
+        "label": "Focus (minutes)",
+        "min": 1,
+        "max": 180,
+        "step": 1,
+        "defaultValue": 25
+      },
+      {
+        "key": "shortBreakMins",
+        "type": "integer",
+        "label": "Short break (minutes)",
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "defaultValue": 5
+      },
+      {
+        "key": "longBreakMins",
+        "type": "integer",
+        "label": "Long break (minutes)",
+        "min": 1,
+        "max": 120,
+        "step": 1,
+        "defaultValue": 15
+      },
+      {
+        "key": "cycles",
+        "type": "integer",
+        "label": "Focus rounds before long break",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "defaultValue": 4
+      },
+      {
+        "key": "notify",
+        "type": "boolean",
+        "label": "Notify when a phase ends",
+        "defaultValue": true
+      },
+      {
+        "key": "icon",
+        "type": "string",
+        "label": "Bar icon",
+        "defaultValue": "🍅"
+      },
+      {
+        "key": "maxEvents",
+        "type": "number",
+        "label": "Events shown (older OmaCal only)"
+      }
+    ]
+  }
+}

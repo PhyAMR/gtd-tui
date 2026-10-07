@@ -1,0 +1,29 @@
+# Binaries
+/gtd
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go
+go.sum
+vendor/
+
+# Config & tokens
+tokens.json
+*.db
+.credentials/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

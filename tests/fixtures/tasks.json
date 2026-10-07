@@ -1,0 +1,33 @@
+[
+  {
+    "id": "task1",
+    "description": "Review Chapter 3 notes",
+    "class_name": "Calculus I",
+    "review_count": 0,
+    "interval": 1,
+    "status": "pending",
+    "created_at": "2024-01-15T08:00:00Z",
+    "next_review_at": "2024-01-16T10:00:00Z"
+  },
+  {
+    "id": "task2",
+    "description": "Complete problem set 2",
+    "class_name": "Physics 101",
+    "review_count": 1,
+    "interval": 2,
+    "status": "pending",
+    "created_at": "2024-01-14T08:00:00Z",
+    "next_review_at": "2024-01-17T14:00:00Z"
+  },
+  {
+    "id": "task3",
+    "description": "Implement binary search tree",
+    "class_name": "Computer Science",
+    "review_count": 0,
+    "interval": 1,
+    "status": "done",
+    "created_at": "2024-01-15T09:00:00Z",
+    "completed_at": "2024-01-15T15:30:00Z",
+    "next_review_at": "2024-01-18T09:00:00Z"
+  }
+]

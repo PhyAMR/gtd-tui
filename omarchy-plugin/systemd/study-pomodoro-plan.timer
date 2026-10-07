@@ -1,0 +1,13 @@
+[Unit]
+Description=Daily study session planning
+
+[Timer]
+# Every morning, and again after lunch so the day's ratings and calendar
+# changes are picked up for the next days.
+OnCalendar=*-*-* 06:30:00
+OnCalendar=*-*-* 14:00:00
+Persistent=true
+RandomizedDelaySec=5min
+
+[Install]
+WantedBy=timers.target

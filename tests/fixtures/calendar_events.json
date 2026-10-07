@@ -1,0 +1,26 @@
+[
+  {
+    "id": "event1",
+    "summary": "Calculus I - Lecture",
+    "description": "Derivatives and integration",
+    "start": "2024-01-15T10:00:00-05:00",
+    "end": "2024-01-15T11:30:00-05:00",
+    "location": "Room 301"
+  },
+  {
+    "id": "event2",
+    "summary": "Physics 101 - Lab",
+    "description": "Mechanics experiment",
+    "start": "2024-01-15T14:00:00-05:00",
+    "end": "2024-01-15T16:00:00-05:00",
+    "location": "Physics Lab B"
+  },
+  {
+    "id": "event3",
+    "summary": "Computer Science - Algorithms",
+    "description": "Graph theory and dynamic programming",
+    "start": "2024-01-16T09:00:00-05:00",
+    "end": "2024-01-16T10:30:00-05:00",
+    "location": "CS Building Room 205"
+  }
+]

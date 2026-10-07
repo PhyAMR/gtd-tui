@@ -1,0 +1,45 @@
+#!/bin/bash
+# Study Pomodoro helper: study planning through OmaCal, and timer control.
+#
+#   study-pomodoro setup             Choose calendars, study hours, course difficulty, exam codes
+#   study-pomodoro plan [--dry-run]  Plan the next 7 days (runs daily by itself)
+#   study-pomodoro progress          Per-course overview: difficulty, exam code, what's due
+#   study-pomodoro rate START_MS TITLE again|hard|good|easy   (the popup does this for you)
+#   study-pomodoro calendars         List OmaCal calendars
+#   study-pomodoro toggle|reset|skip|status   Control the running bar timer
+#   study-pomodoro popup             Open/close the calendar + study popup
+#   study-pomodoro legacy-plan       The old weekly study_scheduler.py (--execute)
+
+set -euo pipefail
+
+PLUGIN_ID="phuniverse.study-pomodoro"
+IPC_TARGET="study-pomodoro"
+BIN_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
+PLANNER="$BIN_DIR/../planner/study_planner.py"
+CONFIG_ENV="$HOME/.config/study-pomodoro/env"
+
+# shellcheck disable=SC1090
+[[ -f $CONFIG_ENV ]] && source "$CONFIG_ENV"
+STUDY_PLANNER="${STUDY_PLANNER:-$HOME/Scripts/study_scheduler.py}"
+export PATH="$HOME/.local/bin:$PATH" # omacal's AppImage lives here; systemd units don't add it
+
+planner() { exec /usr/bin/python3 "$PLANNER" "$@"; }
+
+case "${1:-}" in
+  setup) planner setup ;;
+  plan) shift; planner plan "$@" ;;
+  progress) planner status ;;
+  rate) shift; planner rate "$@" ;;
+  calendars) omacal calendars ;;
+  legacy-plan)
+    [[ -f $STUDY_PLANNER ]] || { echo "Planner not found: $STUDY_PLANNER" >&2; exit 1; }
+    exec /usr/bin/python3 "$STUDY_PLANNER" --execute
+    ;;
+  toggle|reset|skip|status) omarchy-shell "$IPC_TARGET" "$1" ;;
+  popup) omarchy-shell shell toggle "$PLUGIN_ID" '{}' ;;
+  *)
+    sed -n '2,13p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+    [[ ${1:-} == "-h" || ${1:-} == "--help" ]] && exit 0
+    exit 1
+    ;;
+esac
